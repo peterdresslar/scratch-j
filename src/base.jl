@@ -1,9 +1,8 @@
 addprocs(3-length(procs())) 
 
-using Distributions
-using CSV
+@everywhere using Distributions
 
-@everywhere mutable struct Player
+@everywhere type Player
   belief
   result
   friends
@@ -11,7 +10,7 @@ using CSV
   #n
 end
 
-@everywhere mutable struct Game
+@everywhere type Game
   binom_n
   epsilon
   players
@@ -69,8 +68,8 @@ end
 @everywhere function InitializeGame(game,network,popSize,binom_n,epsilon)
   game.binom_n = binom_n
   game.epsilon = epsilon
-  game.players = Array{Player}(undef, popSize)
-  game.observers = Array{Player}(undef, popSize)
+  game.players = Array{Player}(popSize)
+  game.observers = Array{Player}(popSize)
 #  game.converged = 0
 #  game.round_converged = 0
 
@@ -174,12 +173,12 @@ for popSize in [30]
       end
     end
   end
-  CSV.write("Cailin extra data no prop popSize$popSize.csv", results)
+  writecsv("Cailin extra data no prop popSize$popSize.csv", results)
 end
 
-#CSV.write("Results NoProp Size$popSize Binom$binom_n Eps$epsilon Complete.txt", DoIt(6,"complete",epsilon,binom_n,10,false))
-#CSV.write("Results NoProp Size$popSize Binom$binom_n Eps$epsilon Cycle.txt", DoIt(6,"cycle",epsilon,binom_n,10,false))
-#CSV.write("Results Prop Size$popSize Binom$binom_n Eps$epsilon Complete.txt", DoIt(6,"complete",epsilon,binom_n,10,true))
-#CSV.write("Results Prop Size$popSize Binom$binom_n Eps$epsilon Cycle.txt", DoIt(6,"cycle",epsilon,binom_n,10,true))
+#writecsv("Results NoProp Size$popSize Binom$binom_n Eps$epsilon Complete.txt", DoIt(6,"complete",epsilon,binom_n,10,false))
+#writecsv("Results NoProp Size$popSize Binom$binom_n Eps$epsilon Cycle.txt", DoIt(6,"cycle",epsilon,binom_n,10,false))
+#writecsv("Results Prop Size$popSize Binom$binom_n Eps$epsilon Complete.txt", DoIt(6,"complete",epsilon,binom_n,10,true))
+#writecsv("Results Prop Size$popSize Binom$binom_n Eps$epsilon Cycle.txt", DoIt(6,"cycle",epsilon,binom_n,10,true))
 
-# CSV.write("results.csv",DoIt)
+#writecsv("results.csv",DoIt)
