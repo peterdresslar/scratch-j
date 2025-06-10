@@ -184,7 +184,7 @@ if length(ARGS) == 0   #### NO ARGS, RUN THE ORIGINAL "CAILIN" CODE
     writedlm("Cailin extra data no prop popSize$popSize.csv", results, ',') #---- change 6, writecsv to writedlm
   end
 elseif length(ARGS) == 6  #### ARGS, RUN THE NEW CODE 
-  # Command line mode: julia upgrade.jl popSize networkType epsilon binom_n runs propagandist
+  # Command line mode: julia model.jl popSize networkType epsilon binom_n runs propagandist
   popSize = parse(Int, ARGS[1])
   networkType = ARGS[2]
   epsilon = parse(Float64, ARGS[3])
@@ -197,9 +197,9 @@ elseif length(ARGS) == 6  #### ARGS, RUN THE NEW CODE
   writedlm(filename, results_from_args, ',')
   println("Results written to: $filename")
 else
-  println("Usage: julia upgrade.jl")
-  println("   or: julia upgrade.jl popSize networkType epsilon binom_n runs propagandist")
-  println("Example: julia upgrade.jl 6 cycle 0.05 10 100 false")
+  println("Usage: julia model.jl")
+  println("   or: julia model.jl popSize networkType epsilon binom_n runs propagandist")
+  println("Example: julia model.jl 6 cycle 0.05 10 100 false")
 end
 
 #writedlm("Results NoProp Size$popSize Binom$binom_n Eps$epsilon Complete.txt", DoIt(6,"complete",epsilon,binom_n,10,false))
